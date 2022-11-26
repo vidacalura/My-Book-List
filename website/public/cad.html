@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="output.css">
+        <script src="auth.js" defer> </script>
+        <title> My Book List - Perfil </title>
+
+    </head>
+
+
+    <body>
+
+        <nav class="w-screen flex justify-between p-3">
+            <h1> My Book List </h1>
+
+            <div class="flex gap-4">
+                <a href="/"> Seu perfil </a>
+
+                <a href="/book"> Books </a>
+
+                <a href="/cadastro"> Login / Cadastro </a>
+            </div>
+        </nav>
+
+        <main>
+
+            <form>
+                
+                <h2> Bem-vindo à My Book List! </h2>
+
+                <input id="nome" type="text" placeholder="Nome de usuário:">
+                <input id="senha" type="password" placeholder="Senha:">
+                <input id="conf-senha" type="password" placeholder="Confirme sua senha:">
+
+                <div id="erro-msg">
+                    
+                </div>
+
+                <input id="cad-btn" type="button" value="Cadastrar">
+
+            </form>
+
+        </main>
+
+    </body>
+
+</html>

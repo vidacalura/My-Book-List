@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind utilities;
+@tailwind components;
+
+* {
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+#lista-topo{
+
+    @apply my-8 pl-[5vw];
+
+}
+
+.book{
+
+    @apply flex justify-center;
+
+}
+.book-container{
+
+    @apply flex justify-between align-middle w-[90vw] py-4 px-8 border border-black;
+
+}
+.book-dados{
+
+    @apply flex w-40 justify-between align-middle pt-3;
+
+}
+.texto-container{
+
+    @apply flex gap-12;
+
+}
+.numero{
+
+    @apply pt-3;
+
+}

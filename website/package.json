@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "request": "^2.88.2",
+    "tailwindcss": "^3.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "mybooklist-client",
+  "version": "0.0.1",
+  "description": "Copy of My Anime List but with books",
+  "main": "server.js",
+  "author": "vidacalura",
+  "license": "GPL-3.0"
+}
