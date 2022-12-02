@@ -2,7 +2,8 @@ const cadBtn = document.getElementById("cad-btn");
 const nomeTxtbox = document.getElementById("nome");
 const senhaTxtbox = document.getElementById("senha");
 const confSenhaTxtbox = document.getElementById("conf-senha");
-const erroDiv = document.getElementById("erro-msg")
+const erroDiv = document.getElementById("erro-msg");
+
 
 cadBtn.addEventListener("click", (e) => {
 
@@ -10,7 +11,6 @@ cadBtn.addEventListener("click", (e) => {
 
     fetch("http://localhost:5500/cadastro", {
         method: "POST",
-        mode: "cors",
         headers: {
             'Content-type': "application/JSON"
         },

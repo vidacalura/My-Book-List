@@ -25,8 +25,8 @@ app.use(sessions({
 
 
 /* Rotas */
-app.get("/", (req, res) => {
-    res.status(200).sendFile("./public/index.html", { root: __dirname });
+app.get("/:username", (req, res) => {
+    res.status(200).sendFile("./public/index.html", { root: __dirname });    
 });
 
 app.get("/book", (req, res) => {

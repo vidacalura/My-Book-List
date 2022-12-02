@@ -1,5 +1,3 @@
-<!-- Procurar livro -->
-    <!-- Se não há livro: Cadastrar novo livro -->
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -8,13 +6,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> My Book List - Books </title>
+        <link rel="stylesheet" type="text/css" href="output.css">
+        <title> My Book List - Perfil </title>
 
     </head>
 
 
     <body>
-    
+
         <nav class="w-screen flex justify-between p-3">
             <h1> My Book List </h1>
 
@@ -28,15 +27,22 @@
         </nav>
 
         <main>
-            <!-- Barra de pesquisa -->
-            <div id="book-barra-pesquisa">
 
-            </div>
+            <form>
+                
+                <h2> Bem-vindo de volta! </h2>
 
-            <!-- Resultados -->
-            <div id="book-pesquisa-resultados">
+                <input id="nome" type="text" placeholder="Nome de usuário:">
+                <input id="senha" type="password" placeholder="Senha:">
 
-            </div>
+                <div id="erro-msg">
+                    
+                </div>
+
+                <input id="cad-btn" type="button" value="Entrar">
+
+            </form>
+
         </main>
 
     </body>
