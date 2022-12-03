@@ -11,6 +11,7 @@ app.use(cors({ origin: "*" }));
 
 app.listen(port);
 
+
 /* Routes */
 app.get("/", (req, res) => {
     res.status(200).send("Conexão estabelecida com sucesso.");
@@ -26,20 +27,20 @@ app.get("/books", async (req, res) => {
 
 });
 
-app.get("/books/:id", async (req, res) => {
+app.get("/books/:nome", async (req, res) => {
 
-    if (req.params.id){
+    if (req.params.nome){
         db.promise()
-        .execute("SELECT * FROM books;")
+        .execute("SELECT * FROM books WHERE nome LIKE ?", [
+            "%" + req.params.nome + "%"
+        ])
         .then(([rows]) => {
-
-            for (let i = 0; i < rows.length; i++){
-                if (rows[i].cod_book == req.params.id){
-                    res.status(200).send(rows[i]);
-                }
+            if (rows[0]){
+                res.status(200).send(rows);
             }
-
-            res.status(404).send({ "error": "Book não encontrado. :(" });
+            else {
+                res.status(200).send({ "message": "Nenhum book com este nome cadastrado no momento." })
+            }
         });
     }
     else {
@@ -55,20 +56,40 @@ app.get("/users/:nome", async (req, res) => {
         dados = []
         
         // Achar ID do usuário
-
-
-        // Achar livros registrados do usuário
         db.promise()
-        .execute("SELECT * FROM registros WHERE cod_user = ?;", [
-            codUser
+        .execute("SELECT cod_user FROM users WHERE nome = ?;", [
+            req.params.nome
         ])
         .then(([rows]) => {
-            for (let i = 0; i < rows.length; i++){
-                dados.push();
+            if (rows[0]){
+                const codUser = rows[0].cod_user;
+
+                // Achar livros registrados do usuário
+                db.promise()
+                .execute("\
+                SELECT registros.nota, registros.capitulos_lidos, registros.capitulos_total, registros.estado, \
+                books.nome, books.autor \
+                FROM registros \
+                INNER JOIN books \
+                ON registros.cod_book = books.cod_book \
+                WHERE registros.cod_user = ?;", [
+                    codUser
+                ])
+                .then(([r]) => {
+                    if (r.length > 0){
+                        res.status(200).send(r);
+                    }
+                    else {
+                        res.status(200).send({ "message": "Este usuário ainda não tem books cadastrados." });
+                    }
+                });
+
+            }
+            else{
+                res.status(404).send({ "error": "Usuário não encontrado" });
             }
         });
 
-        // Retorna: nome do livro, autor, nota, capitulos total, capitulos lidos e estado
     }
     else {
         res.status(422).send({ "error": "Argumentos insuficientes." });

@@ -1,29 +1,48 @@
-const url = window.location.href.split("/");
-const username = url[url.length - 1]
-const listaDiv = document.getElementById("lista");
-const listaUser = document.getElementById("lista-user");
-listaUser.textContent = "Lista de " + username;
+const barraPesquisa = document.getElementById("barra-pesquisa");
+const resultadosPesquisaDiv = document.getElementById("book-pesquisa-resultados");
 
-fetchBooks();
+barraPesquisa.addEventListener("keydown", (e) => {
+
+    if (e.key == "Enter")
+        procurarLivros(barraPesquisa.value);
+
+});
 
 
-function fetchBooks(){
-    fetch("http://localhost:4000/users/" + username, {
+async function procurarLivros(nome){
+
+    fetch("http://localhost:4000/books/" + nome, {
         method: "GET",
         headers: {
             'Content-type': "application/JSON"
         }
     })
     .then((rawRes) => { return rawRes.json(); })
-    .then((data) => { 
-        if (data.message){
-            alert(data.message);
+    .then((res) => {
+        if (res.message){
+            while (resultadosPesquisaDiv.firstElementChild){
+                resultadosPesquisaDiv.removeChild(resultadosPesquisaDiv.firstElementChild);
+            }
+
+            const message = document.createElement("h2");
+            message.textContent = res.message;
+
+            const criarBookBtn = document.createElement("a");
+            criarBookBtn.textContent = "Clique aqui para registrar!";
+            criarBookBtn.href = "/book/criar";
+
+            resultadosPesquisaDiv.appendChild(message);
+            resultadosPesquisaDiv.appendChild(criarBookBtn);
         }
-        else if (data.error){
-            alert(data.error);
+        else if (res.error){
+            alert(res.error);
         }
         else {
-            for (let i = 0; i < data.length; i++){
+            while (resultadosPesquisaDiv.firstElementChild){
+                resultadosPesquisaDiv.removeChild(resultadosPesquisaDiv.firstElementChild);
+            }
+
+            for (let i = 0; i < res.length; i++){
                 const bookDiv = document.createElement("div");
                 bookDiv.classList.add("book");
 
@@ -42,11 +61,11 @@ function fetchBooks(){
 
                 const bookNome = document.createElement("h3");
                 bookNome.classList.add("book-nome");
-                bookNome.textContent = data[i].nome;
+                bookNome.textContent = res[i].nome;
 
                 const bookAutor = document.createElement("h4");
                 bookAutor.classList.add("book-autor");
-                bookAutor.textContent = data[i].autor;
+                bookAutor.textContent = res[i].autor;
 
                 bookTextoDiv.appendChild(bookNome);
                 bookTextoDiv.appendChild(bookAutor);
@@ -56,11 +75,11 @@ function fetchBooks(){
 
                 const bookScore = document.createElement("h3");
                 bookScore.classList.add("book-score");
-                bookScore.textContent = data[i].nota;
+                bookScore.textContent = res[i].nota_media;
 
                 const bookProgress = document.createElement("h3");
                 bookProgress.classList.add("book-progress");
-                bookProgress.textContent = data[i].capitulos_lidos + "/" + data[i].capitulos_total;
+                bookProgress.textContent = res[i].capitulos;
 
                 bookDadosDiv.appendChild(bookScore);
                 bookDadosDiv.appendChild(bookProgress);
@@ -77,16 +96,9 @@ function fetchBooks(){
                 bookContainer.appendChild(textoContainer);
                 bookContainer.appendChild(bookDadosDiv);
                 bookDiv.appendChild(bookContainer);
-                listaDiv.appendChild(bookDiv);
+                resultadosPesquisaDiv.appendChild(bookDiv);
             }
         }
     });
+
 }
-
-/* 
-
-API functions:
-- deleteBook
-- updateBook
-
-*/

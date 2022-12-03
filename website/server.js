@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
@@ -17,7 +18,7 @@ app.use(cors({ origin: "http://127.0.0.1:4000" }));
 
 app.use(cookieParser());
 app.use(sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    secret: process.env.key,
     saveUninitialized:true,
     cookie: { maxAge: 253402300000000 },
     resave: false
@@ -25,12 +26,16 @@ app.use(sessions({
 
 
 /* Rotas */
-app.get("/:username", (req, res) => {
+app.get("/user/:username", (req, res) => {
     res.status(200).sendFile("./public/index.html", { root: __dirname });    
 });
 
 app.get("/book", (req, res) => {
     res.status(200).sendFile("./public/book.html", { root: __dirname });
+});
+
+app.get("/book/criar", (req, res) => {
+    res.status(200).sendFile("./public/bookcriar.html", { root: __dirname });
 });
 
 app.get("/cadastro", (req, res) => {
@@ -45,7 +50,7 @@ app.post("/cadastro", (req, res) => {
 
     const { nome, senha, confirmacaoSenha } = req.body;
 
-    if (validacaoDadosCadastro(nome, senha, confirmacaoSenha)){
+    if (validacaoUserCadastro(nome, senha, confirmacaoSenha)){
         // Encriptar dados
         const hash = crypto.createHmac('sha512', process.env.KEY);
         hash.update(senha);
@@ -67,8 +72,6 @@ app.post("/cadastro", (req, res) => {
             req.session.nome = nome;
             req.session.id = data.id;
 
-            console.log(req.session);
-
             res.json({
                 "message": "Cadastrado com sucesso!"
             });
@@ -83,9 +86,24 @@ app.post("/cadastro", (req, res) => {
 
 });
 
+app.post("/book/criar", (req, res) => {
+    
+    const { nome, autor, capitulos } = req.body;
 
-/* Cadastro */
-function validacaoDadosCadastro(n, s, cs){
+    if (req.session.id){
+        if (validacaoBookCadastro(nome, autor, capitulos)){
+
+        }
+        else{
+            
+        }
+    }
+
+});
+
+
+// Cadastro 
+function validacaoUserCadastro(n, s, cs){
 
     if (n.length > 16 || n.length <= 3){
         return false;
@@ -98,4 +116,12 @@ function validacaoDadosCadastro(n, s, cs){
     }
 
     return true;
+}
+
+function validacaoBookCadastro(n, a, c){
+
+    if (!n || !a || !c){
+        return false;
+    }
+
 }

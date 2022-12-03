@@ -1,0 +1,50 @@
+<!-- Procurar livro -->
+    <!-- Se não há livro: Cadastrar novo livro -->
+    <!DOCTYPE html>
+    <html lang="pt-br">
+    
+        <head>
+    
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" type="text/css" href="/output.css">
+            <script src="/bookcriar.js" defer> </script>
+            <title> My Book List - Books </title>
+    
+        </head>
+    
+    
+        <body>
+        
+            <nav class="w-screen flex justify-between p-3">
+                <h1> My Book List </h1>
+    
+                <div class="flex gap-4">
+                    <a href="/user/"> Seu perfil </a>
+    
+                    <a href="/book"> Books </a>
+    
+                    <a href="/cadastro"> Login / Cadastro </a>
+                </div>
+            </nav>
+    
+            <main>
+                
+                <form>
+
+                    <input type="text" id="book-nome" placeholder="Nome do livro:">
+
+                    <input type="text" id="book-autor" placeholder="Autor:">
+
+                    <input type="text" id="book-capitulos" placeholder="Quantidade de capítulos:">
+
+                    <input type="submit" id="book-cad-btn" value="Cadastrar livro">
+
+                </form>
+
+            </main>
+    
+        </body>
+    
+    </html>

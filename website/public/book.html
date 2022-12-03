@@ -8,6 +8,8 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/output.css">
+        <script src="/book.js" defer> </script>
         <title> My Book List - Books </title>
 
     </head>
@@ -19,7 +21,7 @@
             <h1> My Book List </h1>
 
             <div class="flex gap-4">
-                <a href="/"> Seu perfil </a>
+                <a href="/user/"> Seu perfil </a>
 
                 <a href="/book"> Books </a>
 
@@ -30,12 +32,12 @@
         <main>
             <!-- Barra de pesquisa -->
             <div id="book-barra-pesquisa">
-
+                <input type="text" id="barra-pesquisa" placeholder="Insira o nome do livro aqui!">
             </div>
 
             <!-- Resultados -->
             <div id="book-pesquisa-resultados">
-
+                <h2> Os resultados de sua pesquisa irão aparecer aqui! </h2>
             </div>
         </main>
 
