@@ -39,12 +39,12 @@ app.get("/books/:nome", async (req, res) => {
                 res.status(200).send(rows);
             }
             else {
-                res.status(200).send({ "message": "Nenhum book com este nome cadastrado no momento." })
+                res.status(200).json({ "message": "Nenhum book com este nome cadastrado no momento." })
             }
         });
     }
     else {
-        res.status(422).send({ "error": "Argumentos insuficientes." });
+        res.status(422).json({ "error": "Argumentos insuficientes." });
     }
 
 });
@@ -80,19 +80,19 @@ app.get("/users/:nome", async (req, res) => {
                         res.status(200).send(r);
                     }
                     else {
-                        res.status(200).send({ "message": "Este usuário ainda não tem books cadastrados." });
+                        res.status(200).json({ "message": "Este usuário ainda não tem books cadastrados." });
                     }
                 });
 
             }
             else{
-                res.status(404).send({ "error": "Usuário não encontrado" });
+                res.status(404).json({ "error": "Usuário não encontrado" });
             }
         });
 
     }
     else {
-        res.status(422).send({ "error": "Argumentos insuficientes." });
+        res.status(422).json({ "error": "Argumentos insuficientes." });
     }
 
 });
@@ -102,7 +102,7 @@ app.post("/books", async (req, res) => {
     const { criadoPor, nome, autor, capitulos } = req.body;
 
     if (criadoPor == null || nome == null || autor == null || capitulos == null){
-        res.status(422).send({ "error": "Argumentos insuficientes." });
+        res.status(422).json({ "error": "Argumentos insuficientes." });
     }
     else{
         db.promise()
@@ -114,7 +114,7 @@ app.post("/books", async (req, res) => {
             capitulos
         ])
         .then(() => {
-            res.status(200).send({ "message": "Cadastrado com sucesso!" });
+            res.status(200).json({ "message": "Cadastrado com sucesso!" });
         });
     }
 
@@ -125,22 +125,32 @@ app.post("/users/cad", async (req, res) => {
     const { nome, senha } = req.body;
 
     if (nome == null || senha == null){
-        res.status(422).send({ "error": "Argumentos insuficientes." });
+        res.status(422).json({ "error": "Argumentos insuficientes." });
     }
     else if (senha.length < 128){
-        res.status(422).send({ "error": "Senha inválida." });
+        res.status(422).json({ "error": "Senha inválida." });
     }
     else{
-        if (true){ // Checa se usuário já não existe
-            db.promise()
-            .execute("INSERT INTO users (cod_user, nome, senha) VALUES(?, ?)", [
-                nome,
-                senha
-            ])
-            .then(() => {
-                res.status(200).send({ "message": "Usuário cadastrado com sucesso" });
-            });
-        }
+        // Checa se usuário já existe
+        db.promise()
+        .execute("SELECT nome FROM users WHERE nome = ?;", [
+            nome
+        ])
+        .then(([rows]) => {
+            if (!rows[0]){
+                db.promise()
+                .execute("INSERT INTO users (cod_user, nome, senha) VALUES(NULL, ?, ?)", [
+                    nome,
+                    senha
+                ])
+                .then(() => {
+                    res.status(200).json({ "message": "Usuário cadastrado com sucesso" });
+                });
+            }
+            else {
+                res.status(422).json({ "error": "Um usuário com este nome já existe" });
+            }
+        })
     }
 
 });
@@ -156,14 +166,14 @@ app.post("/users/login", async (req, res) => {
     .then(([rows]) => {
         if (rows[0]){
             if (rows[0].senha == senha){
-                res.json({ "message": "Usuário encontrado." });
+                res.status(200).json({ "message": "Usuário encontrado" });
             }
             else {
-                res.json({ "error": "Senha incorreta" });
+                res.status(422).json({ "error": "Senha incorreta" });
             }
         }
         else {
-            res.json({ "error": "Usuário não encontrado" });
+            res.status(404).json({ "error": "Usuário não encontrado" });
         }
     });
 
@@ -171,29 +181,51 @@ app.post("/users/login", async (req, res) => {
 
 app.post("/regbook", (req, res) => {
 
+    const { userNome, cod_book, capitulos_total } = req.body;
+
     // Acha ID do usuário
-
-    // Verifica se livro já foi registrado pelo usuário
-
-    // Registra livro
     db.promise()
-    .execute("\
-    INSERT INTO registros (cod_user, cod_book, nota, capitulos_lidos, capitulos_total, estado) \
-    VALUES(?, ?, ?, ?, ?, ?)", [
-        null,
-        null,
-        0,
-        0,
-        null,
-        0
+    .execute("SELECT cod_user FROM users WHERE nome = ?;", [
+        userNome
     ])
     .then(([rows]) => {
+        if (rows[0]){
+            // Verifica se livro já foi registrado pelo usuário
+            cod_user = rows[0].cod_user;
 
+            db.promise()
+            .execute("SELECT cod_reg FROM registros WHERE cod_user = ? AND cod_book = ?;", [
+                cod_user,
+                cod_book
+            ])
+            .then(([r]) => {
+                if (!r[0]){
+                    // Registra livro
+                    db.promise()
+                    .execute("\
+                    INSERT INTO registros (cod_user, cod_book, nota, capitulos_lidos, capitulos_total, estado) \
+                    VALUES(?, ?, 0, 0, ?, 0);", [
+                        cod_user,
+                        cod_book,
+                        capitulos_total
+                    ])
+                    .then(([s]) => {
+                        res.status(200).json({ "message": `Livro registrado para ${userNome} com sucesso!` });
+                    });
+                }
+                else {
+                    res.status(422).json({ "error": "Livro já registrado pelo usuário" });
+                }
+            })
+        }
+        else {
+            res.status(404).json({ "error": "Usuário não encontrado" });
+        }
     });
-
 
 });
 
 
 // Cadastrar cod_user aleatório (/user/cad)
 // Verificação /user/cad
+// Verificar se livro já existe antes de cadastro de livros
