@@ -31,7 +31,7 @@ app.get("/books/:nome", async (req, res) => {
 
     if (req.params.nome){
         db.promise()
-        .execute("SELECT * FROM books WHERE nome LIKE ?", [
+        .execute("SELECT * FROM books WHERE nome LIKE ? ORDER BY nome", [
             "%" + req.params.nome + "%"
         ])
         .then(([rows]) => {
@@ -120,7 +120,7 @@ app.post("/books", async (req, res) => {
 
 });
 
-app.post("/users", async (req, res) => {
+app.post("/users/cad", async (req, res) => {
 
     const { nome, senha } = req.body;
 
@@ -131,10 +131,9 @@ app.post("/users", async (req, res) => {
         res.status(422).send({ "error": "Senha inválida." });
     }
     else{
-        // Checa se usuário já não existe
-        if (nome){
+        if (true){ // Checa se usuário já não existe
             db.promise()
-            .execute("INSERT INTO users (nome, senha) VALUES(?, ?)", [
+            .execute("INSERT INTO users (cod_user, nome, senha) VALUES(?, ?)", [
                 nome,
                 senha
             ])
@@ -145,3 +144,56 @@ app.post("/users", async (req, res) => {
     }
 
 });
+
+app.post("/users/login", async (req, res) => {
+
+    const { nome, senha } = req.body;
+    
+    db.promise()
+    .execute("SELECT * FROM users WHERE nome = ?", [
+        nome
+    ])
+    .then(([rows]) => {
+        if (rows[0]){
+            if (rows[0].senha == senha){
+                res.json({ "message": "Usuário encontrado." });
+            }
+            else {
+                res.json({ "error": "Senha incorreta" });
+            }
+        }
+        else {
+            res.json({ "error": "Usuário não encontrado" });
+        }
+    });
+
+});
+
+app.post("/regbook", (req, res) => {
+
+    // Acha ID do usuário
+
+    // Verifica se livro já foi registrado pelo usuário
+
+    // Registra livro
+    db.promise()
+    .execute("\
+    INSERT INTO registros (cod_user, cod_book, nota, capitulos_lidos, capitulos_total, estado) \
+    VALUES(?, ?, ?, ?, ?, ?)", [
+        null,
+        null,
+        0,
+        0,
+        null,
+        0
+    ])
+    .then(([rows]) => {
+
+    });
+
+
+});
+
+
+// Cadastrar cod_user aleatório (/user/cad)
+// Verificação /user/cad
