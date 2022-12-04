@@ -18,7 +18,7 @@
     <body>
     
         <nav class="w-screen flex justify-between p-3">
-            <h1> My Book List </h1>
+            <h1 class="pr-8"> MyBookList </h1>
 
             <div class="flex gap-4">
                 <a href="/user/"> Seu perfil </a>
@@ -31,13 +31,15 @@
 
         <main>
             <!-- Barra de pesquisa -->
-            <div id="book-barra-pesquisa">
+            <div id="book-barra-pesquisa" class="flex justify-center">
                 <input type="text" id="barra-pesquisa" placeholder="Insira o nome do livro aqui!">
             </div>
 
             <!-- Resultados -->
             <div id="book-pesquisa-resultados">
-                <h2> Os resultados de sua pesquisa irão aparecer aqui! </h2>
+                <div class="flex justify-center pt-32 text-xl">
+                    <h2> Os resultados de sua pesquisa irão aparecer aqui! </h2>
+                </div>
             </div>
         </main>
 

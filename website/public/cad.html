@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/output.css">
-        <script src="/auth.js" defer> </script>
+        <script src="/cad.js" defer> </script>
         <title> My Book List - Perfil </title>
 
     </head>
@@ -16,10 +16,10 @@
     <body>
 
         <nav class="w-screen flex justify-between p-3">
-            <h1> My Book List </h1>
+            <h1> MyBookList </h1>
 
             <div class="flex gap-4">
-                <a href="/"> Seu perfil </a>
+                <a href="/user/"> Seu perfil </a>
 
                 <a href="/book"> Books </a>
 
@@ -27,18 +27,22 @@
             </div>
         </nav>
 
-        <main>
+        <main class="pt-8 flex justify-center">
 
-            <form>
+            <form class="auth-form">
                 
-                <h2> Bem-vindo à My Book List! </h2>
+                <h2 class="py-8 font-bold text-white text-2xl"> Bem-vindo à MyBookList! </h2>
 
-                <input id="nome" type="text" placeholder="Nome de usuário:">
-                <input id="senha" type="password" placeholder="Senha:">
+                <input id="nome" type="text" placeholder="Nome de usuário:"> <br>
+                <input id="senha" type="password" placeholder="Senha:"> <br>
                 <input id="conf-senha" type="password" placeholder="Confirme sua senha:">
 
-                <div id="erro-msg">
+                <div id="erro-msg" class="text-red-400 font-bold py-4">
                     
+                </div>
+
+                <div>
+                    <a href="/login" class="text-purple-400"> Já possui uma conta? Entre aqui! </a>
                 </div>
 
                 <input id="cad-btn" type="button" value="Cadastrar">

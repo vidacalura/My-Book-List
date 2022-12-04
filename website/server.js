@@ -26,6 +26,15 @@ app.use(sessions({
 
 
 /* Rotas */
+app.get("/user", (req, res) => {
+    if (req.session.nome){
+        res.redirect("/user/" + req.session.nome);
+    }
+    else {
+        res.redirect("/cadastro");
+    }
+});
+
 app.get("/user/:username", (req, res) => {
     res.status(200).sendFile("./public/index.html", { root: __dirname });    
 });
@@ -43,7 +52,7 @@ app.get("/cadastro", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-    res.status(200).sendFile("./public/auth.html", { root: __dirname });
+    res.status(200).sendFile("./public/login.html", { root: __dirname });
 });
 
 app.post("/cadastro", (req, res) => {
@@ -52,11 +61,11 @@ app.post("/cadastro", (req, res) => {
 
     if (validacaoUserCadastro(nome, senha, confirmacaoSenha)){
         // Encriptar dados
-        const hash = crypto.createHmac('sha512', process.env.KEY);
+        const hash = crypto.createHmac('sha512', process.env.key);
         hash.update(senha);
 
         // Mandar para API
-        fetch("http://127.0.0.1:4000/users", {
+        fetch("http://127.0.0.1:4000/users/cad", {
             method: "POST",
             headers: {
                 'Content-type': "application/JSON"
@@ -68,13 +77,18 @@ app.post("/cadastro", (req, res) => {
         })
         .then((rawRes) => { return rawRes.json(); })
         .then((data) => { 
-            // Iniciar sessão
-            req.session.nome = nome;
-            req.session.id = data.id;
+            if (!data.error){
+                // Iniciar sessão
+                req.session.nome = nome;
+                req.session.id = data.id;
 
-            res.json({
-                "message": "Cadastrado com sucesso!"
-            });
+                res.json({
+                    "message": "Cadastrado com sucesso!"
+                });
+            }
+            else {
+                res.json({ "error": data.error });
+            }
         });
 
     }
@@ -90,14 +104,73 @@ app.post("/book/criar", (req, res) => {
     
     const { nome, autor, capitulos } = req.body;
 
-    if (req.session.id){
+    if (req.session.nome){
         if (validacaoBookCadastro(nome, autor, capitulos)){
 
         }
-        else{
-            
+        else {
+
         }
     }
+    else{
+        res.json({
+            "error": "Você precisa estar logado para cadastrar um livro."
+        });
+    }
+
+});
+
+// Registra o estado de um livro para um usuário
+app.post("/regbook", (req, res) => {
+    
+    // const { book } = req.body; (?)
+    const userNome = req.session.nome;
+
+    if (req.session.nome){
+
+    }
+    else {
+        res.json({
+            "error": "Você precisa estar logado para registrar um livro ao seu perfil."
+        });
+    }
+
+});
+
+app.post("/login", (req, res) => {
+
+    const { nome, senha } = req.body;
+
+    const hash = crypto.createHmac('sha512', process.env.key);
+    hash.update(senha);
+
+    fetch("http://127.0.0.1:4000/users/login", {
+            method: "POST",
+            headers: {
+                'Content-type': "application/JSON"
+            },
+            body: JSON.stringify({
+                nome: nome,
+                senha: hash.digest("hex")
+            })
+        })
+        .then((rawRes) => { return rawRes.json(); })
+        .then((data) => { 
+            if (!data.error){
+                // Iniciar sessão
+                req.session.nome = nome;
+                req.session.id = data.id;
+
+                res.json({
+                    "message": "Login efetuado com sucesso!"
+                });
+            }
+            else {
+                res.json({
+                    "error": data.error
+                });
+            }
+        });
 
 });
 

@@ -8,9 +8,25 @@
 
 }
 
+body{
+
+    @apply bg-gray-900 text-gray-200 overflow-x-hidden;
+
+}
+nav h1{
+
+    @apply text-white text-xl font-bold;
+
+}
+
 #lista-topo{
 
-    @apply my-8 pl-[5vw];
+    @apply my-14;
+
+}
+#lista-user{
+
+    @apply text-white font-bold text-center text-3xl;
 
 }
 
@@ -19,14 +35,40 @@
     @apply flex justify-center;
 
 }
-.book-container{
+.book-nome{
 
-    @apply flex justify-between align-middle w-[90vw] py-4 px-8 border border-black;
+    @apply text-white text-lg;
+
+}
+.book-autor{
+
+    @apply text-gray-400 text-sm;
+
+}
+.book-container,
+.book-select-container{
+
+    @apply flex justify-between align-middle w-screen sm:w-[90vw] py-4 px-8 bg-gray-800 rounded-lg shadow-md my-1;
+
+}
+.tabela-div{
+
+    @apply flex justify-between align-middle font-bold w-screen sm:w-[90vw] py-4 px-8 bg-purple-600 rounded shadow-sm my-3;
+
+}
+.book-select-container{
+
+    @apply hover:bg-gray-700 cursor-pointer;
 
 }
 .book-dados{
 
     @apply flex w-40 justify-between align-middle pt-3;
+
+}
+.tabela-dados{
+
+    @apply flex w-40 justify-between;
 
 }
 .texto-container{
@@ -37,5 +79,29 @@
 .numero{
 
     @apply pt-3;
+
+}
+
+.auth-form{
+
+    @apply w-[80vw] md:w-[40vw] bg-slate-800 shadow-lg rounded-lg text-center py-8;
+
+}
+input[type="text"],
+input[type="password"]{
+
+    @apply px-4 py-2 my-2 rounded shadow-md text-gray-800 outline-none border-none;
+
+}
+input[type="submit"],
+input[type="button"]{
+
+    @apply my-8 py-2 px-4 rounded-full bg-purple-800 text-white font-bold cursor-pointer shadow-md;
+
+}
+
+#barra-pesquisa{
+
+    @apply w-[80vw] my-8;
 
 }
