@@ -82,7 +82,14 @@ nav h1{
 
 }
 
-.auth-form{
+#edit-form{
+
+    @apply absolute z-10 mt-16;
+
+}
+
+.auth-form,
+#edit-form{
 
     @apply w-[80vw] md:w-[40vw] bg-slate-800 shadow-lg rounded-lg text-center py-8;
 

@@ -542,22 +542,9 @@ video {
   padding-bottom: 2rem;
 }
 
-.py-2 {
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.pt-8 {
-  padding-top: 2rem;
-}
-
-.pr-4 {
-  padding-right: 1rem;
 }
 
 .pr-8 {
@@ -568,14 +555,18 @@ video {
   padding-top: 8rem;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .font-bold {
@@ -592,22 +583,9 @@ video {
   color: rgb(248 113 113 / var(--tw-text-opacity));
 }
 
-.text-purple-900 {
-  --tw-text-opacity: 1;
-  color: rgb(88 28 135 / var(--tw-text-opacity));
-}
-
 .text-purple-400 {
   --tw-text-opacity: 1;
   color: rgb(192 132 252 / var(--tw-text-opacity));
-}
-
-.underline {
-  text-decoration-line: underline;
-}
-
-.outline {
-  outline-style: solid;
 }
 
 * {
@@ -748,7 +726,14 @@ nav h1 {
   padding-top: 0.75rem;
 }
 
-.auth-form {
+#edit-form {
+  position: absolute;
+  z-index: 10;
+  margin-top: 4rem;
+}
+
+.auth-form,
+#edit-form {
   width: 80vw;
   border-radius: 0.5rem;
   --tw-bg-opacity: 1;
@@ -762,7 +747,8 @@ nav h1 {
 }
 
 @media (min-width: 768px) {
-  .auth-form {
+  .auth-form,
+#edit-form {
     width: 40vw;
   }
 }

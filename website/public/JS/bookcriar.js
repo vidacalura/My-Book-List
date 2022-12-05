@@ -10,19 +10,19 @@ bookCadBtn.addEventListener("click", async () => {
         headers: {
             'Content-type': "application/JSON"
         },
-        body: {
+        body: JSON.stringify({
             nome: bookNome.value.trim(),
             autor: bookAutor.value.trim(),
             capitulos: bookCapitulos.value.trim()
-        }
+        })
     })
     .then((rawRes) => { return rawRes.json(); })
     .then((res) => {
         if (res.error){
-
+            alert(res.error);
         }
         else {
-            
+            window.location.href = "http://localhost:5500/user/";
         }
     });
 

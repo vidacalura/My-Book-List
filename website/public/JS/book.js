@@ -11,7 +11,7 @@ barraPesquisa.addEventListener("keydown", (e) => {
 
 async function procurarLivros(nome){
 
-    fetch("http://localhost:4000/books/" + nome, {
+    fetch("http://localhost:4000/api/books/" + nome, {
         method: "GET",
         headers: {
             'Content-type': "application/JSON"
@@ -135,19 +135,22 @@ async function procurarLivros(nome){
 
 function adicionarLivroARegistros(book){
 
-    fetch("http://localhost:4000/regbook/", {
+    fetch("http://localhost:5500/regbook", {
         method: "POST",
         headers: {
             'Content-type': "application/JSON"
         },
-        body: {
-            bookData: book
-        }
+        body: JSON.stringify({
+            book
+        })
     })
     .then((rawRes) => { return rawRes.json(); })
     .then((res) => {
         if (res.error){
-            alert(res);
+            alert(res.error);
+        }
+        else {
+            alert(res.message);
         }
     });
     
