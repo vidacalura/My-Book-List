@@ -40,6 +40,11 @@ nav h1{
     @apply text-white text-lg;
 
 }
+.edit-btn{
+
+    @apply text-sm text-purple-400 pb-2;
+
+}
 .book-autor{
 
     @apply text-gray-400 text-sm;
@@ -95,7 +100,10 @@ nav h1{
 
 }
 input[type="text"],
-input[type="password"]{
+input[type="password"],
+input[type="number"],
+select,
+option{
 
     @apply px-4 py-2 my-2 rounded shadow-md text-gray-800 outline-none border-none;
 

@@ -634,6 +634,14 @@ nav h1 {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.edit-btn {
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  --tw-text-opacity: 1;
+  color: rgb(192 132 252 / var(--tw-text-opacity));
+}
+
 .book-autor {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -754,7 +762,10 @@ nav h1 {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"],
+select,
+option {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 0.25rem;

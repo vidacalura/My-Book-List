@@ -316,14 +316,20 @@ function validacaoBookCadastro(n, a, c){
 
 function validacaoRegUpdate(n, c, e){
 
-    if (NUmber(n) > 10 || Number(n) < 1){
-        return false;
+    if (n){
+        if (Number(n) > 10 || Number(n) < 1){
+            return false;
+        }
     }
-    if (c.length > 3){
-        return false;
+    if (c){
+        if (c.length > 3){
+            return false;
+        }
     }
-    if (Number(e) > 3 || Number(e) < 0){
-        return false;
+    if (e){
+        if (Number(e) > 3 || Number(e) < 0){
+            return false;
+        }
     }
 
     return true;

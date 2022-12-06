@@ -20,5 +20,4 @@ app.listen(port);
 
 /* Client: */
 // estado (livro)
-// Front-end edit btn + edit form
 // Responsividade

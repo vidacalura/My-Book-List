@@ -71,6 +71,7 @@ function fetchBooks(){
                 // Se for sua conta:
                 const btnEdit = document.createElement("button");
                 btnEdit.textContent = "Edit";
+                btnEdit.classList.add("edit-btn");
 
                 btnEdit.addEventListener("click", () => { CRUDLivro(data[i]); });
 
@@ -119,8 +120,10 @@ async function CRUDLivro(book){
             formTitle.className = "font-bold text-xl py-4";
 
             const inputNota = document.createElement("input");
-            inputNota.type = "text";
-            inputNota.placeholder = "Nova nota:";
+            inputNota.type = "number";
+            inputNota.placeholder = "Nota";
+            inputNota.min = "1";
+            inputNota.max = "10";
 
             const br1 = document.createElement("br");
             const br2 = document.createElement("br");
@@ -128,13 +131,34 @@ async function CRUDLivro(book){
 
             const inputCapitulos = document.createElement("input");
             inputCapitulos.type = "number";
-            inputCapitulos.placeholder = "Capítulos lidos:";
+            inputCapitulos.placeholder = "Capítulos";
+            inputCapitulos.min = "0";
+            inputCapitulos.max = book.capitulos_total;
 
-            const inputEstado = document.createElement("input");
-            inputEstado.type = "text";
-            inputEstado.placeholder = "Estado:";
+            const inputEstado = document.createElement("select");
+            inputEstado.id = "estado";
+            inputEstado.name = "estado";
 
-            const divErro = document.createElement("div");
+            const opt1 = document.createElement("option");
+            opt1.value = "0";
+            opt1.textContent = "Planejo ler";
+
+            const opt2 = document.createElement("option");
+            opt2.value = "1";
+            opt2.textContent = "Lendo";
+
+            const opt3 = document.createElement("option");
+            opt3.value = "2";
+            opt3.textContent = "Lido";
+
+            const opt4 = document.createElement("option");
+            opt4.value = "3";
+            opt4.textContent = "Parado";
+
+            inputEstado.appendChild(opt1);
+            inputEstado.appendChild(opt2);
+            inputEstado.appendChild(opt3);
+            inputEstado.appendChild(opt4);
 
             const btnContainer = document.createElement("div");
             btnContainer.classList.add("book");
@@ -195,7 +219,6 @@ async function CRUDLivro(book){
             form.appendChild(inputCapitulos);
             form.appendChild(br2);
             form.appendChild(inputEstado);
-            form.appendChild(divErro);
             form.appendChild(br3);
             btnContainer.appendChild(envBtn);
             btnContainer.appendChild(delBtn);
