@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const sessions = require('cookie-session');
-
+const fetch = require("node-fetch");
 const crypto = require("crypto");
 const cors = require("cors");
 require('dotenv').config();
