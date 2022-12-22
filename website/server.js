@@ -1,14 +1,14 @@
 require('dotenv').config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const sessions = require('express-session');
+const sessions = require('cookie-session');
 
 const crypto = require("crypto");
 const cors = require("cors");
 require('dotenv').config();
 
 const app = express();
-app.listen(5500);
+app.listen(process.env.PORT || 5500);
 
 app.use(express.static("./public/CSS"));
 app.use(express.static("./public/JS"));
