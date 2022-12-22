@@ -10,11 +10,13 @@ require('dotenv').config();
 const app = express();
 app.listen(process.env.PORT || 5500);
 
+const API = "https://my-book-list-api.vercel.app/"
+
 app.use(express.static("./public/CSS"));
 app.use(express.static("./public/JS"));
 app.use(express.json());
 
-app.use(cors({ origin: "http://127.0.0.1:4000" }));
+app.use(cors({ origin: API }));
 
 app.use(cookieParser());
 app.use(sessions({
@@ -65,7 +67,7 @@ app.post("/cadastro", async (req, res) => {
         hash.update(senha);
 
         // Mandar para API
-        fetch("http://127.0.0.1:4000/api/users/cad", {
+        fetch(API + "api/users/cad", {
             method: "POST",
             headers: {
                 'Content-type': "application/JSON"
@@ -106,7 +108,7 @@ app.post("/books/criar", async (req, res) => {
 
     if (req.session.nome){
         if (validacaoBookCadastro(nome, autor, capitulos)){
-            fetch("http://127.0.0.1:4000/api/books", {
+            fetch(API + "api/books", {
                 method: "POST",
                 headers: {
                     'Content-type': "application/JSON"
@@ -141,7 +143,7 @@ app.post("/regbook", async (req, res) => {
     if (userNome){
         const { book } = req.body;
 
-        fetch("http://127.0.0.1:4000/api/regbook/", {
+        fetch(API + "api/regbook/", {
             method: "POST",
             headers: {
                 'Content-type': "application/JSON"
@@ -177,7 +179,7 @@ app.post("/login", async (req, res) => {
     const hash = crypto.createHmac('sha512', process.env.key);
     hash.update(senha);
 
-    fetch("http://127.0.0.1:4000/api/users/login", {
+    fetch(API + "api/users/login", {
             method: "POST",
             headers: {
                 'Content-type': "application/JSON"
@@ -221,7 +223,7 @@ app.get("/checarsessao/:nome", (req, res) => {
 app.put("/regbook", (req, res) => {
 
     const { nota, capitulos, estado, cod_book } = req.query;
-    let reqUrl = "http://127.0.0.1:4000/api/regbook?"
+    let reqUrl = API + "api/regbook?"
 
     if (validacaoRegUpdate(nota, capitulos, estado)){
         if (nota != ""){
@@ -234,7 +236,7 @@ app.put("/regbook", (req, res) => {
             reqUrl += `estado=${estado}&`
         }
 
-        if (reqUrl == "http://127.0.0.1:4000/api/regbook?"){
+        if (reqUrl == API + "api/regbook?"){
             res.json({ "error": "Argumentos insuficientes" });
         }
         else {
@@ -260,7 +262,7 @@ app.put("/regbook", (req, res) => {
 app.delete("/regbook", (req, res) => {
     
     if (req.query.cod_book){
-        fetch("http://127.0.0.1:4000/api/regbook?cod_book=" + req.query.cod_book +
+        fetch(API + "api/regbook?cod_book=" + req.query.cod_book +
               "&userNome=" + req.session.nome, {
             method: "DELETE",
             headers: {

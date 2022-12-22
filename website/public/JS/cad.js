@@ -9,7 +9,7 @@ cadBtn.addEventListener("click", (e) => {
 
     e.preventDefault();
 
-    fetch("http://localhost:5500/cadastro", {
+    fetch("/cadastro", {
         method: "POST",
         headers: {
             'Content-type': "application/JSON"
@@ -29,7 +29,7 @@ cadBtn.addEventListener("click", (e) => {
             erroDiv.appendChild(error);
         }
         else {
-            window.location.href = "http://localhost:5500/user/";
+            window.location.href = "/user/";
         }
     });
 

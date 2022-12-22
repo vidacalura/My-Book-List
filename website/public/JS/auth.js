@@ -7,7 +7,7 @@ loginBtn.addEventListener("click", (e) => {
 
     e.preventDefault();
 
-    fetch("http://localhost:5500/login", {
+    fetch("https://mybooklist.onrender.com/login", {
         method: "POST",
         headers: {
             'Content-type': "application/JSON"
@@ -26,7 +26,7 @@ loginBtn.addEventListener("click", (e) => {
             erroDiv.appendChild(error);
         }
         else {
-            window.location.href = "http://localhost:5500/user/";
+            window.location.href = "https://mybooklist.onrender.com/user/";
         }
     });
 

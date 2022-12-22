@@ -6,7 +6,9 @@ const con = mysql.createPool({
     user: process.env.username,
     host: process.env.host,
     password: process.env.password,
-    ssl: false
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
 
 module.exports = con;

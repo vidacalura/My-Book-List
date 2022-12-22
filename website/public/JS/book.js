@@ -11,7 +11,7 @@ barraPesquisa.addEventListener("keydown", (e) => {
 
 async function procurarLivros(nome){
 
-    fetch("http://localhost:4000/api/books/" + nome, {
+    fetch("https://my-book-list-api.vercel.app/api/books/" + nome, {
         method: "GET",
         headers: {
             'Content-type': "application/JSON"
@@ -135,7 +135,7 @@ async function procurarLivros(nome){
 
 function adicionarLivroARegistros(book){
 
-    fetch("http://localhost:5500/regbook", {
+    fetch("/regbook", {
         method: "POST",
         headers: {
             'Content-type': "application/JSON"

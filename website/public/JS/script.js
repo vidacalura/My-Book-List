@@ -8,7 +8,7 @@ fetchBooks();
 
 
 function fetchBooks(){
-    fetch("http://localhost:4000/api/users/" + username, {
+    fetch("https://my-book-list-api.vercel.app/api/users/" + username, {
         method: "GET",
         headers: {
             'Content-type': "application/JSON"
@@ -92,7 +92,7 @@ function fetchBooks(){
 
 async function CRUDLivro(book){
 
-    fetch("http://localhost:5500/checarsessao/" + username, {
+    fetch("/checarsessao/" + username, {
         method: "GET",
         headers: {
             "Content-type": "Application/JSON"
@@ -169,7 +169,7 @@ async function CRUDLivro(book){
 
             envBtn.addEventListener("click", () => {
                 fetch(
-                    "http://localhost:5500/regbook?" + 
+                    "/regbook?" + 
                     "userNome=null" + "&" +
                     "cod_book=" + book.cod_book + "&" +
                     "nota=" + inputNota.value.trim() + "&" +
@@ -195,7 +195,7 @@ async function CRUDLivro(book){
             delBtn.textContent = "Deletar livro"
 
             delBtn.addEventListener("click", () => {
-                fetch("http://localhost:5500/regbook?cod_book=" + book.cod_book, {
+                fetch("/regbook?cod_book=" + book.cod_book, {
                     method: "DELETE",
                     headers: {
                         "Content-type": "Application/JSON"

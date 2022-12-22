@@ -5,7 +5,7 @@ const bookCadBtn = document.getElementById("book-cad-btn");
 
 bookCadBtn.addEventListener("click", async () => {
 
-    fetch("http://localhost:5500/books/criar", {
+    fetch("/books/criar", {
         method: "POST",
         headers: {
             'Content-type': "application/JSON"
@@ -22,7 +22,7 @@ bookCadBtn.addEventListener("click", async () => {
             alert(res.error);
         }
         else {
-            window.location.href = "http://localhost:5500/user/";
+            window.location = "/user/";
         }
     });
 
