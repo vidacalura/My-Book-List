@@ -7,7 +7,7 @@ const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: "*" })); // mudar para servidor apenas
+app.use(cors({ origin: [ "https://mybooklist.onrender.com/", "http://localhost:5500" ] }));
 
 app.use("/api", routes);
 
