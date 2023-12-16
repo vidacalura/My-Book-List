@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Create your own book list, avaliate your books and show it to your friends!"/>    
+        <meta name="keywords" content="Book, Books, Book list, List"/>
+        <link rel="stylesheet" type="text/css" href="CSS/output.css">
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"> </script>
+        <title> My Book List </title>
+
+    </head>
+
+
+    <body>
+        
+        <header>
+            <a href="/"> <h1> MyBookList </h1> </a>
+
+            <div id="header-btns">
+                <a href="login.html"> <button id="login-btn"> Login </button> </a>
+                <a href="signup.html"> <button id="sign-up-btn"> Sign up </button> </a>
+            </div>
+        </header>
+
+        <main class="border-dark-400 bg-dark-500 border md:mx-[20vw] rounded shadow-md">
+            <div id="search-bar-container">
+                <!-- Options for search bar -->
+                <select id="search-bar-options">
+                    <option value=""> Search type </option>
+                    <option value="genre"> Book genre </option>
+                    <option value="title"> Book title </option>
+                    <option value="user"> Username </option>
+                </select>
+
+                <!-- Search bar -->
+                <input type="search" id="search-bar-home">
+            </div>
+
+            <!-- Banner -->
+            <div id="banner-container">
+                <img src="assets/home_banner.png" alt="Banner My Book List">
+            </div>
+
+            <!-- Feed top 10 books -->
+            <div id="top-10-books">
+                <h2> Top rated books </h2>
+
+                <div id="top-books-container" class="bg-dark-600">
+
+                </div>
+            </div>
+        </main>
+
+    </body>
+
+</html>

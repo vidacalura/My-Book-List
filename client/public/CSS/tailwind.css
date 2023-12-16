@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-dark-600 text-white;
+}
+
+header {
+    @apply flex w-screen justify-between px-8 md:px-[10vw] py-[3vh];
+}
+
+header h1 {
+    @apply font-bold text-xl md:text-2xl 2xl:text-3xl
+}
+
+#header-btns {
+    @apply flex gap-4 md:gap-8;
+}
+
+#login-btn {
+    @apply bg-dark-500 font-bold px-4 py-2 rounded-md shadow-md;
+}
+
+#sign-up-btn {
+    @apply bg-blue-600 font-bold px-4 py-2 rounded-md shadow-md;
+}
+
+#search-bar-container {
+    @apply flex justify-end py-2 px-3 gap-2;
+}
+
+#search-bar-container * {
+    @apply bg-dark-600 border-dark-400 border text-sm p-1 rounded shadow-sm
+    outline-none;
+}
+
+#top-10-books {
+    @apply py-4 px-6;
+}
+
+#top-10-books h2 {
+    @apply text-lg md:text-xl font-bold;
+}
