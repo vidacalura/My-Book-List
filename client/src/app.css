@@ -85,3 +85,24 @@ header h1 {
 .btns-search button {
     @apply bg-blue-400 rounded-md px-3 font-bold text-xl shadow-md;
 }
+
+#book-state-filter-div {
+    @apply flex justify-center px-12 gap-8 text-lg text-blue-400 font-bold pb-4 border-b border-dark-400;
+}
+
+#book-state-filter-div a {
+    @apply hover:text-blue-200 transition-all;
+}
+
+.profile-book-card {
+    @apply flex w-[98%] mx-[1%] py-2;
+    align-items: center;
+}
+
+.plan-to-read {
+    border-color: none none rgb(63, 63, 63) #FFF;
+}
+.reading {
+    border-bottom: 1px solid rgb(63, 63, 63);
+    border-left: 8px solid rgb(37, 99, 235);
+}

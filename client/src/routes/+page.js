@@ -6,7 +6,7 @@ export async function load({ fetch, params }) {
 
 /**
  * Fetches the top 10 most well avaliated books on the system.
- * @param {object} fetch - Fetcher from sveltekit.
+ * @param {function} fetch - Fetcher from sveltekit.
  * @returns {Array|null} - Feed with top 10 books.
  */
 async function fetchHomeFeed(fetch) {

@@ -25,7 +25,7 @@ function getURLSearchParams(url) {
 
 /**
  * Fetches books by either title or genre.
- * @param {object} fetch - Fetcher from sveltekit.
+ * @param {function} fetch - Fetcher from sveltekit.
  * @param {string} searchType - Type of search. Title or genre.
  * @param {string} searchValue - Value to be searched.
  * @returns {Array|null} - Books corresponding to the search.
