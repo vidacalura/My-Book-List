@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-dark-600 text-white overflow-x-hidden;
+}
+
+header {
+    @apply flex w-screen justify-between px-8 md:px-[10vw] py-[3vh];
+}
+
+header h1 {
+    @apply font-bold text-xl md:text-2xl 2xl:text-3xl
+}
+
+#header-btns {
+    @apply flex gap-4 md:gap-8;
+}
+
+#login-btn {
+    @apply bg-dark-500 font-bold px-4 py-2 rounded-md shadow-md;
+}
+
+#sign-up-btn {
+    @apply bg-blue-600 font-bold px-4 py-2 rounded-md shadow-md;
+}
+
+#search-bar-container {
+    @apply flex justify-end py-2 px-3 gap-2;
+}
+
+#search-bar-container * {
+    @apply bg-dark-600 border-dark-400 border text-sm p-1 rounded shadow-sm
+    outline-none;
+}
+
+.feed-book-card {
+    @apply flex justify-around align-middle py-4 px-2 mx-6 my-4 bg-dark-500
+    rounded-lg shadow-md;
+}
+
+#main-search-bar {
+    @apply bg-dark-300 text-gray-300 w-[36vw] rounded-l-lg outline-none p-3;
+}
+
+#search-icon-btn {
+    @apply bg-dark-500 h-full w-12 text-blue-300 font-bold rounded-r-lg;
+}
+
+#search-results-container {
+    @apply w-full h-full text-center bg-dark-600 py-8;
+    margin: 0 auto;
+}
+
+.search-page-title {
+    @apply flex mx-3;
+}
+.search-page-title div {
+    @apply bg-dark-500 border-r border-dark-600 rounded-sm text-sm py-1;
+}
+
+.search-page-book-card-dark {
+    @apply flex justify-around w-full;
+}
+.search-page-book-card-light {
+    @apply bg-[#181818] flex justify-around w-full;
+}
+
+.title-search,
+.writer-search {
+    @apply w-[42%] flex border-r border-dark-300 px-5;
+    align-items: center;
+}
+
+.avg-score-search {
+    @apply w-[8%] flex justify-center border-r border-dark-300;
+    align-items: center;
+}
+
+.btns-search {
+    @apply w-[8%] flex justify-center;
+    align-items: center;
+}
+.btns-search button {
+    @apply bg-blue-400 rounded-md px-3 font-bold text-xl shadow-md;
+}
